@@ -1,0 +1,2 @@
+export type PickRow={symbol:string;name:string;score:number|null;stageLabel:string|null;stage:number|null;trend:number|null;stability:number|null;asOf:number|null;price:number|null;status:'ready'|'unavailable'|'error';reason?:string};
+export function rankPicks(rows:PickRow[]){const sorted=rows.filter(r=>r.status==='ready'&&r.score!==null&&Number.isFinite(r.score)).sort((a,b)=>b.score!-a.score!||a.symbol.localeCompare(b.symbol));let rank=0;return sorted.map((r,i)=>{if(i===0||r.score!==sorted[i-1].score)rank=i+1;return {...r,rank};});}
